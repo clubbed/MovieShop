@@ -1,5 +1,4 @@
-﻿using MovieShop.Library.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +12,6 @@ namespace MovieShop
     {
         protected void Application_Start()
         {
-            TheMovieDBApi.SeedFromApi();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

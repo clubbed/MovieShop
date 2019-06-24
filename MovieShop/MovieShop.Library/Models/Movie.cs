@@ -13,5 +13,7 @@ namespace MovieShop.Library.Models
         public string Overview { get; set; }
         public string Original_Language { get; set; }
         public DateTime Release_Date { get; set; }
+        public bool IsOutOfStock { get; set; }
+        public decimal Price { get; set; }
     }
 }

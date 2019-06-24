@@ -1,5 +1,4 @@
-﻿using MovieShop.Library.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -26,7 +25,6 @@ namespace MovieShop.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-        
+        }        
     }
 }

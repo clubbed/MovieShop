@@ -55,16 +55,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\TheMovieDBApi.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Logic\BaseRepository.cs" />
+    <Compile Include="Logic\MovieContext.cs" />
+    <Compile Include="Logic\MovieInitializer.cs" />
+    <Compile Include="Logic\MovieRepository.cs" />
+    <Compile Include="Migrations\201906211513263_Movie.cs" />
+    <Compile Include="Migrations\201906211513263_Movie.Designer.cs">
+      <DependentUpon>201906211513263_Movie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Logic\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201906211513263_Movie.resx">
+      <DependentUpon>201906211513263_Movie.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
