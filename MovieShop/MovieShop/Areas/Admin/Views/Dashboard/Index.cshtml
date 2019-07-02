@@ -1,9 +1,27 @@
-﻿
+﻿@model MovieShop.ViewModels.Admin.Dashboard.DashboardIndexViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2 class="text-center">Dashboard</h2>
 
-<p>HEYYYYYY</p>
+<hr />
+<div class="row">
+    <div class="col-md-4 border shadow-lg">
+        <h1 class="text-center">Movies</h1>
+        <p class="lead text-center">Number of movies: @Model.MovieCount</p>
+        <div>
+            <a href="@Url.Action("AddMovie")" class="btn btn-secondary float-left">Add a Movie</a>
+        </div>
+    </div>
+    <div class="col-md-4 border shadow-lg">
+        <h1 class="text-center">Rents</h1>
+        <p class="lead text-center">Number of rents: @Model.RentCount</p>
+    </div>
+    <div class="col-md-4 border shadow-lg">
+        <h1 class="text-center">Users</h1>
+        <p class="lead text-center">Number of users: @Model.UserCount</p>
+    </div>
+</div>

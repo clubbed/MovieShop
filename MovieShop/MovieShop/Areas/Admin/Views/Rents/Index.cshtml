@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MovieShop.Models.Rent>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+@if (Model.Any())
+{
+    <table class="table table-bordered table-hover" id="rentTable">
+        <thead>
+            <tr>
+                <td>
+                    Movie Title
+                </td>
+                <td>
+                    Genre
+                </td>
+                <td>
+                    User
+                </td>
+            </tr>
+        </thead>
+    </table>
+}
+else
+{
+    <p class="text-center">No rents at the moment.</p>
+}
+
+
+@*Datatables css*@
+<link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+@*Datatables js*@
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#rentTable").DataTable({
+                "ajax": {
+                    "url": "/admin/rents/rents",
+                    "type": "GET",
+                    "dataType": "json"
+                },
+                "columns": [
+                    { "data": "MovieTitle" },
+                    { "data": "Genre" },
+                    { "data": "UserName"}
+                ]
+            });
+
+        });
+    </script>
+    }

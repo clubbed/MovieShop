@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNet.Identity
+
+@model MovieShop.ViewModels.DetailsMovieViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="container">
+    <div>
+        <a href="@Url.Action("Index","Movie")" class="btn btn-dark">Back</a>
+    </div>
+    <div class="col-md-10 offset-1">
+        <h1 class="text-center">@Model.Title</h1>
+        <img src="@Model.ImagePath" class="align-self-center" width="300" height="300" alt="@Model.Title" />
+        <p class="lead">@Model.Description</p>
+
+        <p></p>
+        @if (Model.Rent.Any())
+        {
+            foreach (var rent in Model.Rent)
+            {
+
+                if (Model.UserId != rent.UserId)
+                {
+                    using (Html.BeginForm("Rent", "Movie", new { movieId = Model.Id }, FormMethod.Post))
+                    {
+                        <button class="btn btn-success">Rent</button>
+                    }
+
+                }
+                else
+                {
+                    <button class="btn btn-secondary disabled">Already Rented</button>
+
+                    using (Html.BeginForm("CancelRent", "Movie", new { movieId = Model.Id }, FormMethod.Post))
+                    {
+                        <button class="btn btn-danger mt-2">Cancel</button>
+                    }
+
+                }
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("Rent", "Movie", new { movieId = Model.Id }, FormMethod.Post))
+            {
+                <button class="btn btn-success">Rent</button>
+            }
+        }
+
+    </div>
+</div>
+

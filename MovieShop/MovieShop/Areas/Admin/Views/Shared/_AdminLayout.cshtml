@@ -17,10 +17,10 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Start Bootstrap </div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Movies</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users"></i>Users</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+                <a href="@Url.Action("Index","Dashboard")" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+                <a href="@Url.Action("Movies","Dashboard")" class="list-group-item list-group-item-action bg-light">Movies</a>
+                <a href="@Url.Action("Index","Rents")" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users"></i>Rents</a>
+                <a href="@Url.Action("Index","Users")" class="list-group-item list-group-item-action bg-light">Users</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -59,6 +59,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required:false)
     <script>
         $(document).ready(function () {
             $("#menu-toggle").click(function (e) {

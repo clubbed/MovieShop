@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MovieShop.ViewModels.IndexMovieViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Index", "Movie", FormMethod.Get, new { @class = "form-inline mb-3" }))
+    {
+        <div class="form-group">
+            <label for="search">Search: </label>
+        </div>
+        <div class="form-group ml-2">
+            <input type="text" id="search" name="search" class="form-control" value="@Request.QueryString["search"]" />
+        </div>
+        <div class="form-group ml-2">
+            <input type="submit" class="btn btn-outline-primary" value="Search" />
+        </div>
+    }
+    @if (Request.QueryString["search"] != null)
+    {
+    <a class="btn btn-outline-dark" href="@Url.Action("Index")">Refresh List</a>
+    }
+    <hr />
+    <div class="row">
+        @if (Model.Any())
+        {
+            foreach (var movie in Model)
+            {
+                <div class="card col-md-3 mr-2">
+                    <a href="@Url.Action("Details", new { id = movie.Id })">
+                        <img src="@movie.ImagePath" class="card-img-top mt-2" width="250" height="250" />
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">@movie.Title</h5>
+                        <p class="card-text">Genre - @movie.GenreName</p>
+                        <p class="card-text">Release Date - @movie.ReleasedDate</p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-center lead">No movies at the moment. If you are an admin please add new movie.</p>
+        }
+    </div>
+
+</div>
