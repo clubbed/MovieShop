@@ -3,8 +3,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Movies</h2>
-<div><a href="@Url.Action("AddMovie")" class="btn btn-secondary float-right mb-2">Add Movie</a></div>
+<h2 class="dashboard p-4 mb-5 text-primary text-center display-4">Movies</h2>
+
+<div><a href="@Url.Action("AddMovie")" class="btn btn-primary float-right mb-2" id="movie">Add Movie</a></div>
 <table class="table table-bordered table-hover" id="myTable" style="width:100%">
     <thead>
         <tr>
@@ -29,47 +30,52 @@
 <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 
 @*Datatables js*@
+
 @section Scripts{
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function () {
-             function DeleteRow(id) {
+        function DeleteRow(id) {
                 $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("DeleteMovie","Movies")/' + id,
+                    type: 'DELETE',
+                    url: '/admin/movies/deletemovie/' + id,
                     dataType: 'json',
                     success: function (response) {
-                        alert('Successful deleted movie with id - ' + id);
+                        alert(response);
                         window.location.reload();
                     },
                     error: function (errorMsg) {
                         alert(errorMsg.responseText);
                     }
                 });
-            }
+        }
 
+        $(document).ready(function () {
+            
             $("#myTable").DataTable({
                 "ajax": {
-                    "url": "/admin/dashboard/listmovies",
+                    "url": "/admin/movies/listmovies",
                     "type": "GET",
                     "datatype": "json"
                 },
                 "columns": [
                     { "data": "Title" },
                     { "data": "GenreName" },
-                    { "data": "ReleaseDate" },
+                    { "data": "CreatedDate" },
                     {
                         "data": "MovieId", "width": "50px", "render": function (data) {
                             return '<div class="btn-group" role="group" aria-label="Basic example">'
                                 + '<a href="/admin/movies/editmovie/' + data + '" class="btn btn-secondary"> Edit</a >'
-                                + "<a onclick=\DeleteRow(" + data + ")\ class='btn btn-danger'>Delete</a>"
+                                + "<a class='btn btn-danger' data-id=" + data + " id='deleteBtn'> Delete</a > "
                                    +'</div >'
                         }
                     }
                 ]
             });
-
+            
 
         });
+
+        var movieId = $("#deleteBtn").data('id');
+        console.log("movieId", movieId);
     </script>
 }

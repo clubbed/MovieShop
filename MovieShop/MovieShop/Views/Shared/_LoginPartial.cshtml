@@ -6,14 +6,20 @@
     @Html.AntiForgeryToken()
 
 <ul class="nav navbar-nav navbar-right">
+    @if (User.IsInRole("Admin"))
+    {
     <li class="nav-item">
         <a class="nav-link" href="~/Admin/Dashboard">Admin</a>
     </li>
+    }
+    @if (!User.IsInRole("Admin"))
+    {
     <li class="nav-item">
-        <a class="nav-link" href="@Url.Action("Rented","Movie")">Rented</a>
+        <a class="nav-link" href="@Url.Action("Rented", "Movie")">Rented</a>
     </li>
+    }
     <li class="nav-item">
-        <a class="nav-link" href="#">Chat</a>
+        <a class="nav-link" href="@Url.Action("Index","Chat")">Chat</a>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

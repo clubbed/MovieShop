@@ -10,6 +10,6 @@ namespace MovieShop.DTOs
         public int MovieId { get; set; }
         public string Title { get; set; }
         public string GenreName { get; set; }
-        public string ReleaseDate { get; set; }
+        public string CreatedDate { get; set; }
     }
 }

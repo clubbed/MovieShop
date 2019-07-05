@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<MovieShop.Models.Rent>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rents";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+
+<h2 class="dashboard p-4 mb-5 text-center text-primary display-4">Rents</h2>
+
 @if (Model.Any())
 {
     <table class="table table-bordered table-hover" id="rentTable">

@@ -5,23 +5,44 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 class="text-center">Dashboard</h2>
+<h2 class="dashboard p-4 text-center text-primary display-4">Dashboard</h2>
 
-<hr />
-<div class="row">
-    <div class="col-md-4 border shadow-lg">
-        <h1 class="text-center">Movies</h1>
-        <p class="lead text-center">Number of movies: @Model.MovieCount</p>
-        <div>
-            <a href="@Url.Action("AddMovie")" class="btn btn-secondary float-left">Add a Movie</a>
+    <div class="row">
+        <div class="text-primary dashboard m-5 col-md-3">
+            <div class="bg-primary rounded text-center mt-4">
+                <h4 class="text-white m-2 p-3">Movie</h4>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title text-center">Number of movies <span class="badge badge-primary badge-pill text-white">@Model.MovieCount</span></h4>
+                <ul class="list-group">
+                    <li class="list-group-item text-primary"><a href="" class="btn btn-primary">View Movies</a></li>
+                    <li class="list-group-item text-primary"><a href="" class="btn btn-primary">Add new Movie</a></li>
+                </ul>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
         </div>
+        <div class="dashboard text-primary m-5 col-md-3">
+            <div class="bg-primary rounded text-center mt-4">
+                <h4 class="text-white m-2 p-3">Rents</h4>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">Number of rents <span class="badge badge-primary badge-pill text-white">@Model.RentCount</span></h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="dashboard text-primary m-5 col-md-3">
+            <div class="bg-primary rounded text-center mt-4">
+                <h4 class="text-white m-2 p-3">Users</h4>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">Users registered <span class="badge badge-primary badge-pill text-white">@Model.UserCount</span></h4>
+                <ul class="list-group">
+                    <li class="list-group-item text-primary">lorem ipsum dolorem</li>
+                    <li class="list-group-item">lorem ipsum dolorem</li>
+                    <li class="list-group-item">lorem ipsum dolorem</li>
+                    <li class="list-group-item">lorem ipsum dolorem</li>
+                </ul>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>  
     </div>
-    <div class="col-md-4 border shadow-lg">
-        <h1 class="text-center">Rents</h1>
-        <p class="lead text-center">Number of rents: @Model.RentCount</p>
-    </div>
-    <div class="col-md-4 border shadow-lg">
-        <h1 class="text-center">Users</h1>
-        <p class="lead text-center">Number of users: @Model.UserCount</p>
-    </div>
-</div>

@@ -7,6 +7,8 @@ namespace MovieShop.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
+        public string GenreName { get; set; }
+
 
         public IEnumerable<RentViewModel> Rent { get; set; }
         public string UserId { get; internal set; }

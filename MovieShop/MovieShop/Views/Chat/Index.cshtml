@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="display-4 text-center">Chat</h2>
+
+<style>
+    body1 {
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 0 20px;
+    }
+
+    .container1 {
+        border: 2px solid #dedede;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .darker {
+        border-color: #ccc;
+        background-color: #ddd;
+    }
+
+    .container1::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .container1 img {
+        float: left;
+        max-width: 60px;
+        width: 100%;
+        margin-right: 20px;
+        border-radius: 50%;
+    }
+
+        .container1 img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right: 0;
+        }
+
+    .time-right {
+        float: right;
+        color: #aaa;
+    }
+
+    .time-left {
+        float: left;
+        color: #999;
+    }
+</style>
+
+<hr />
+<div class="container">
+    <div class="panel panel-default row">
+        <div class="panel-heading col-md-3 card">
+            <h5 class="p-3 navBorderBottom">Users</h5>
+            <ul id="user"></ul>
+        </div>
+        <div class="border col-md-9">
+            <div class="panel-body">
+                <h5 class="p-3 navBorderBottom">Chat Message</h5>
+                <div class="" id="message">
+
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer col-md-6 offset-md-3">
+            <div class="form-inline my-2 my-lg-0 pt-2 float-right">
+                <input class="form-control mr-sm-2" type="text" id="txt" placeholder="Message..">
+                <button class="btn btn-secondary my-2 my-sm-0" id="send">Send</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        console.log("signalr duhh");
+        var hub = $.connection.chatHub;
+        debugger;
+        hub.client.message = function (msg) {
+            $("#message").append(chatTemplate(msg));
+        }
+
+        hub.client.user = function (msg) {
+            $("#user").append("<li>" + msg + "</li>")
+        }
+
+        $.connection.hub.start(function () {
+            $("#send").click(function () {
+                hub.server.send($("#txt").val());
+                $("#txt").val(" ");
+            })
+        })
+
+        function chatTemplate(msg) {
+            var result = "";
+            var dt = new Date();
+            var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+            if (msg.split("~")[0] == "You") {
+                result += "<div class='container1'>" +
+                    "<img src='https://imgur.com/I80W1Q0.png/' alt='Avatar' style='width:100%;'>" +
+                    "<p>" + msg.split("~")[1] + "</p>" +
+                    "<span class='time-right'>" + time + "</span> " +
+                    "</div>";
+            } else {
+                result += "<div class='container1 darker'>" +
+                    "<img src='https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Bearded_Man-17-512.png' alt='Avatar' style='width:100%;'>" +
+                    "<p>" + msg.split("~")[1] + "</p>" +
+                    "<span class='time-right'>" + time + "</span> " +
+                    "</div>";
+            }
+
+
+
+            return result;
+        }
+    </script>
+
+}

@@ -10,6 +10,7 @@ namespace MovieShop.Data.Interfaces
         IEnumerable<Movie> SearchMoviesByTitle(string search);
 
         int GetCount();
+        IEnumerable<Movie> GetTodayMovies();
 
         void Add(Movie movie);
         void Update(int id, Movie updatedMovie);

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MovieShop.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RentsController : Controller
     {
         public IUnitOfWork _unitOfWork { get; set; }

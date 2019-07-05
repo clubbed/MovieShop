@@ -1,14 +1,11 @@
 ﻿using MovieShop.Data.Interfaces;
 using MovieShop.ViewModels.Admin.Users;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MovieShop.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         public IUnitOfWork _unitOfWork { get; set; }

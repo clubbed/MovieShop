@@ -26,7 +26,7 @@ namespace MovieShop.ViewModels
 
         [Required]
         [DisplayName("Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public IEnumerable<Genre> Genres { get; set; }
     }

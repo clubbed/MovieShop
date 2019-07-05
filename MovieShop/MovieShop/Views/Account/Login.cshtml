@@ -10,7 +10,7 @@
     {
         @Html.AntiForgeryToken();
         <h1 class="text-center">Sign In</h1>
-        <hr />
+        <hr  class="lineBorderBottom"/>
         <div class="form-group col-md-10 offset-1">
             <label for="inputEmail">Email address</label>
             @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "example@email.com", autofocus = "autofocus", required = "", id = "inputEmail" })
@@ -29,10 +29,8 @@
             @Html.ValidationSummary(null, new { @class = "text-danger" })
         </p>
     }
-    <hr class="my-4">
     <div class="form-signin">
         <button class="btn btn-lg btn-danger btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-        <a class="btn btn-lg btn-primary btn-block text-uppercase" href="@Url.Action("Register","Account")"><i class="fab fa-facebook-f mr-2"></i> Register</a>
     </div>
 </div>
 

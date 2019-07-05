@@ -8,7 +8,7 @@
 <br />
 @if (Model.Any())
 {
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover animated zoomIn">
     <thead class="bg-dark text-white">
         <tr>
             <td>
@@ -27,7 +27,7 @@
         {
             <tr>
                 <td>
-                    @rent.Title
+                    @Html.ActionLink(rent.Title,"Details", new { id = rent.MovieId })
                 </td>
                 <td>
                     @rent.GenreName

@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>Admin Panel</title>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/admin.css" rel="stylesheet" />
 </head>
 <body>
     <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
+
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Start Bootstrap </div>
+            <div class="sidebar-heading text-primary">Admin </div>
             <div class="list-group list-group-flush">
-                <a href="@Url.Action("Index","Dashboard")" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-                <a href="@Url.Action("Movies","Dashboard")" class="list-group-item list-group-item-action bg-light">Movies</a>
-                <a href="@Url.Action("Index","Rents")" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users"></i>Rents</a>
-                <a href="@Url.Action("Index","Users")" class="list-group-item list-group-item-action bg-light">Users</a>
+                <a href="@Url.Action("Index","Dashboard")" class="list-group-item list-group-item-action bg-light"><i class="fa fa-archway"></i> Dashboard</a>
+                <a href="@Url.Action("Index","Movies")" class="list-group-item list-group-item-action bg-light"><i class="fa fa-film"></i> Movies</a>
+                <a href="@Url.Action("Index","Rents")" class="list-group-item list-group-item-action bg-light"><i class="fa fa-columns"></i> Rents</a>
+                <a href="@Url.Action("Index","Users")" class="list-group-item list-group-item-action bg-light"><i class="fa fa-users"></i> Users</a>
+                <a href="/" class="list-group-item list-group-item-action bg-light"><i class="fa fa-arrow-left"></i> Back to User View</a>
             </div>
         </div>
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
+
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <button class="btn btn-primary" id="menu-toggle">Show/Hide</button>
@@ -32,17 +33,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                                @using (Html.BeginForm("LogOff", "Account",new { area = "" }, FormMethod.Post, new { id = "logout" }))
+                                {
+                                    @Html.AntiForgeryToken();
+                                    
+                                    <li class="nav-item active"><a class="nav-link" href="javascript:document.getElementById('logout').submit()">Log Out</a></li>
+                                }
 
-                        @if (User.IsInRole("Admin"))
-                        {
-                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logout" }))
-                            {
-                                @Html.AntiForgeryToken();
-                                <li class="nav-item active"><a class="nav-link" href="#" onclick="logOut();">Log Out</a></li>
-                            }
-                        }
-                    </ul>
+                        </ul>
                 </div>
             </nav>
             <div class="container-fluid">
@@ -53,13 +52,12 @@
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
+
     </div>
-    <!-- /#wrapper -->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required:false)
+    @RenderSection("scripts", required: false)
     <script>
         $(document).ready(function () {
             $("#menu-toggle").click(function (e) {

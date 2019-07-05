@@ -1,5 +1,6 @@
 ﻿using MovieShop.Data.Interfaces;
 using MovieShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace MovieShop.Data.Repository
         public MovieRepository(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public IEnumerable<Movie> GetTodayMovies()
+        {
+            return _context.Movies.Where(m => m.CreatedDate.Date == DateTime.Today);
         }
 
         public int GetCount()

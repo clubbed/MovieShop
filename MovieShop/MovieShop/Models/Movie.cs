@@ -25,8 +25,7 @@ namespace MovieShop.Models
 
         [Required]
         [DataType(DataType.DateTime)]
-        [DisplayName("Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 

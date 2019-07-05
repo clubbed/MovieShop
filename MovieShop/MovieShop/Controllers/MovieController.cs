@@ -3,12 +3,13 @@ using MovieShop.Data.Interfaces;
 using MovieShop.Models;
 using MovieShop.ViewModels;
 using System;
+using PagedList;
+using PagedList.Mvc;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace MovieShop.Controllers
 {
-    [Authorize]
     public class MovieController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +19,7 @@ namespace MovieShop.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public ActionResult Index(int? page, string search)
+        public ActionResult Index(string search, int? page)
         {
             var movies = _unitOfWork.Movie.GetAll();
 
@@ -34,10 +35,10 @@ namespace MovieShop.Controllers
                 ImagePath = movie.ImagePath,
                 Description = movie.Description,
                 GenreName = movie.Genre.Name,
-                ReleasedDate = movie.ReleaseDate.ToShortDateString()
+                ReleasedDate = movie.CreatedDate.ToShortDateString()
             });
 
-            return View(model);
+            return View(model.ToPagedList(page ?? 1, 8));
         }
 
         public ActionResult Details(int id)
@@ -53,6 +54,7 @@ namespace MovieShop.Controllers
                 Description = movie.Description,
                 ImagePath = movie.ImagePath,
                 UserId = User.Identity.GetUserId(),
+                GenreName = movie.Genre.Name,
                 Rent = rent.Select(r => new RentViewModel
                 {
                     UserId = r.UserId,
@@ -63,6 +65,7 @@ namespace MovieShop.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Rented()
         {
             var userId = User.Identity.GetUserId();
@@ -79,6 +82,7 @@ namespace MovieShop.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Rent(int movieId)
         {
@@ -96,6 +100,7 @@ namespace MovieShop.Controllers
             return RedirectToAction("Details", new { id = movieId });
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult CancelRent(int movieId)
         {

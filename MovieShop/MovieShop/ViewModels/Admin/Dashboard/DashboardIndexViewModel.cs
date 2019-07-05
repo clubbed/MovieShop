@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,5 +13,7 @@ namespace MovieShop.ViewModels.Admin.Dashboard
         public int UserCount { get; set; }
 
         public int RentCount { get; set; }
+
+        public IEnumerable<Movie> LastMovie { get; set; }
     }
 }

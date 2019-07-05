@@ -1,16 +1,10 @@
 ﻿using MovieShop.Data.Interfaces;
-using MovieShop.DTOs;
-using MovieShop.Models;
-using MovieShop.ViewModels;
 using MovieShop.ViewModels.Admin.Dashboard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace MovieShop.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
         public IUnitOfWork _unitOfWork { get; set; }
@@ -19,7 +13,7 @@ namespace MovieShop.Areas.Admin.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        // GET: Admin/Dashboard
+
         public ActionResult Index()
         {
             var model = new DashboardIndexViewModel

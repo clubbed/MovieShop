@@ -3,13 +3,12 @@ using MovieShop.DTOs;
 using MovieShop.Models;
 using MovieShop.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MovieShop.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MoviesController : Controller
     {
         public IUnitOfWork _unitOfWork { get; set; }
@@ -47,13 +46,14 @@ namespace MovieShop.Areas.Admin.Controllers
                 Description = viewModel.Description,
                 ImagePath = viewModel.ImagePath,
                 GenreId = viewModel.GenreId,
-                ReleaseDate = DateTime.Now
+                CreatedDate = DateTime.Now
             };
 
             _unitOfWork.Movie.Add(movie);
+
             _unitOfWork.CommitChanges();
 
-            return Json(movie, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index", "Movies");
         }
 
         public ActionResult EditMovie(int id)
@@ -66,7 +66,7 @@ namespace MovieShop.Areas.Admin.Controllers
                 Title = movie.Title,
                 Description = movie.Description,
                 ImagePath = movie.ImagePath,
-                ReleaseDate = movie.ReleaseDate,
+                CreatedDate = DateTime.Now,
                 Genres = _unitOfWork.Genre.GetGenres(),
                 GenreId = movie.GenreId
             };
@@ -86,7 +86,7 @@ namespace MovieShop.Areas.Admin.Controllers
                 Description = viewModel.Description,
                 GenreId = viewModel.GenreId,
                 ImagePath = viewModel.ImagePath,
-                ReleaseDate = DateTime.Now
+                CreatedDate = DateTime.Now
             };
 
             _unitOfWork.Movie.Update(viewModel.Id, movie);
@@ -116,7 +116,7 @@ namespace MovieShop.Areas.Admin.Controllers
                 MovieId = m.Id,
                 Title = m.Title,
                 GenreName = m.Genre.Name,
-                ReleaseDate = m.ReleaseDate.ToShortDateString()
+                CreatedDate = m.CreatedDate.ToShortDateString()
             });
 
             return Json(new { data = movieData }, JsonRequestBehavior.AllowGet);
