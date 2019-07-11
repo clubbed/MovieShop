@@ -16,7 +16,6 @@ namespace MovieShop.ViewModels
         [Required]
         public string Description { get; set; }
 
-        [Required]
         [DisplayName("Genre")]
         public int GenreId { get; set; }
 
